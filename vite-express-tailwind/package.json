@@ -28,7 +28,7 @@
     "@epic-web/restore-scroll": "latest",
     "@sentry/react": "latest",
     "@sentry/remix": "latest",
-    "classnames": "latest",
+    "clsx": "latest",
     "tailwind-merge": "latest",
     "remix-validated-form": "^5.1.0",
     "morgan": "latest",

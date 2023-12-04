@@ -7,6 +7,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import './styles/tailwind.css'
+import { zipClsx } from '~/utils/zipClsx';
 
 export default function App() {
   return (
@@ -17,7 +18,11 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className={
+        zipClsx(
+        `bg-white text-gray-800 antialiased`,
+        )
+      }>
         <Outlet />
         <ScrollRestoration />
         <Scripts />

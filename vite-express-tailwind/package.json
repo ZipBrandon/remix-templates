@@ -83,6 +83,7 @@
   },
   "overrides": {
     "react": "$react",
-    "react-dom": "$react-dom"
+    "react-dom": "$react-dom",
+    "typescript": "$typescript"
   }
 }

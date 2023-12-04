@@ -1,0 +1,11 @@
+{
+  "plugins": ["react-hooks"],
+  "extends": ["@remix-run/eslint-config", "@remix-run/eslint-config/node"],
+  "rules": {
+    "quotes": [2, "backtick"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "import/no-webpack-loader-syntax": "off",
+    "@typescript-eslint/no-unused-vars": "off"
+  }
+}

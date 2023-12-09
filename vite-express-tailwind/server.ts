@@ -1,9 +1,7 @@
-import { unstable_createViteServer, unstable_loadViteServerBuild } from "@remix-run/dev";
 import { createRequestHandler } from "@remix-run/express";
 import { installGlobals } from "@remix-run/node";
 import { commitHash } from "commitHash.ts";
 import compression from "compression";
-import cors from "cors";
 import express from "express";
 import morgan from "morgan";
 
@@ -26,7 +24,18 @@ const build = {
   },
 };
 
-let vite = process.env.NODE_ENV === `production` ? undefined : await unstable_createViteServer();
+async function createViteServer() {
+  const remixRunDev = await import(`@remix-run/dev`);
+  return await remixRunDev.unstable_createViteServer();
+}
+
+async function loadViteServerBuild(arg) {
+  const remixRunDev = await import(`@remix-run/dev`);
+  return  remixRunDev.unstable_loadViteServerBuild(arg);
+}
+
+
+let vite = process.env.NODE_ENV === `production` ? undefined : await createViteServer()
 
 const app = express();
 app.use(compression());
@@ -69,7 +78,7 @@ app.all(`/healthz`, (req, res, next) => {
 app.all(
   `*`,
   createRequestHandler({
-    build: vite ? () => unstable_loadViteServerBuild(vite!) : await import(`./build/index.js`),
+    build: vite ? () => loadViteServerBuild(vite!) : await import(`./build/index.js`),
     mode: process.env.NODE_ENV,
     getLoadContext(req, res) {
       let assetVersion = ``;
